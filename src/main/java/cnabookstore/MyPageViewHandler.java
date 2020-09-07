@@ -30,7 +30,9 @@ public class MyPageViewHandler {
                 // view 객체에 이벤트의 Value 를 set 함
                 myPage.setCustomerId(ordered.getCustomerId());
                 myPage.setOrderId(ordered.getOrderId());
+                myPage.setBookId(ordered.getBookId());
                 myPage.setQuantity(ordered.getQuantity());
+                myPage.setDeliveryAddress(ordered.getDeliveryAddress());
                 myPage.setOrderStatus(ordered.getOrderStatus());
                 // view 레파지 토리에 save
                 myPageRepository.save(myPage);
@@ -39,6 +41,7 @@ public class MyPageViewHandler {
             e.printStackTrace();
         }
     }
+
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whenDeliveryPrepared_then_UPDATE_1 (@Payload DeliveryPrepared deliveryPrepared) {
