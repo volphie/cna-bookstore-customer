@@ -20,7 +20,40 @@ public class MyPageViewHandler {
 
     @Autowired
     private MyPageRepository myPageRepository;
-    
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenOrdered_then_CREATE_1 (@Payload Ordered ordered) {
+        try {
+            if (ordered.isMe()) {
+                // view 객체 생성
+                MyPage myPage = new MyPage();
+                // view 객체에 이벤트의 Value 를 set 함
+                myPage.setCustomerId(ordered.getCustomerId());
+                myPage.setOrderId(ordered.getOrderId());
+                myPage.setQuantity(ordered.getQuantity());
+                myPage.setOrderStatus(ordered.getOrderStatus());
+                // view 레파지 토리에 save
+                myPageRepository.save(myPage);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenDeliveryPrepared_then_CREATE_2 (@Payload DeliveryPrepared deliveryPrepared) {
+        try {
+            if (deliveryPrepared.isMe()) {
+                // view 객체 생성
+                MyPage myPage = new MyPage();
+                // view 객체에 이벤트의 Value 를 set 함
+                // view 레파지 토리에 save
+                myPageRepository.save(myPage);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     //추후 수정요망
     
 //    @StreamListener(KafkaProcessor.INPUT)
