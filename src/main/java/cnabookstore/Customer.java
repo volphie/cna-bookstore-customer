@@ -36,10 +36,10 @@ public class Customer {
 //        book.setBookName(this.getId());
 //        book.setStock();
 
-        cnabookstore.external.Book book = new cnabookstore.external.Book();
-        // mappings goes here
-        CustomerApplication.applicationContext.getBean(cnabookstore.external.BookService.class)
-            .increaseInventory(book);
+//        cnabookstore.external.Book book = new cnabookstore.external.Book();
+//        // mappings goes here
+//        CustomerApplication.applicationContext.getBean(cnabookstore.external.BookService.class)
+//            .increaseInventory(book);
 
 
     }
