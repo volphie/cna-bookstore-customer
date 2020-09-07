@@ -9,6 +9,6 @@ public interface MyPageRepository extends CrudRepository<MyPage, Long> {
 
 	List<MyPage> findByOrderId(Long orderId);
 
-    void deleteByDeliveryId(Long deliveryId);
+//    void deleteByDeliveryId(Long deliveryId);
     void deleteByOrderId(Long orderId);
 }
