@@ -21,14 +21,21 @@ public class MyPageViewHandler {
     @Autowired
     private MyPageRepository myPageRepository;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     @StreamListener(KafkaProcessor.INPUT)
     public void whenOrdered_then_CREATE_1 (@Payload Ordered ordered) {
         try {
+
+            Optional<Customer> loadCustomerName = customerRepository.findById(ordered.getCustomerId());
+
             if (ordered.isMe()) {
                 // view 객체 생성
                 MyPage myPage = new MyPage();
                 // view 객체에 이벤트의 Value 를 set 함
                 myPage.setCustomerId(ordered.getCustomerId());
+                myPage.setCustomerName(loadCustomerName.get().getCustomerName());
                 myPage.setOrderId(ordered.getOrderId());
                 myPage.setBookId(ordered.getBookId());
                 myPage.setQuantity(ordered.getQuantity());

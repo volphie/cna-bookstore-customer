@@ -10,6 +10,16 @@ public class MyPage {
         @Id
         @GeneratedValue(strategy=GenerationType.AUTO)
         private Long customerId;
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    private String customerName;
         private String orderStatus;
         private Long orderId;
         private Long bookId;
